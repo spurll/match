@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Log In</h1>
+
+<div class="login">
+    <form id="login-form" action="" method="POST" name="login-form">
+        {{ form.hidden_tag() }}
+
+        <div class="username">{{ form.username.label }}{{ form.username(autofocus=True) }}</div>
+        <div class="password">{{ form.password.label }}{{ form.password }}</div>
+        <div class="submit">
+            {{ form.remember }}{{ form.remember.label }}
+            <input type="submit" value="Log In" />
+        </div>
+    </form>
+</div>
+
+<div class="signup">
+    <p>Don't have an account?</p>
+    <p><a class="button" href={{ url_for("signup") }}>Sign Up!</a></p>
+</div>
+
+{% endblock %}
+

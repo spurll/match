@@ -1,0 +1,6 @@
+[submodule "vote/static/sortable"]
+	path = vote/static/sortable
+	url = https://github.com/RubaXa/Sortable/
+[submodule "Sortable"]
+	path = Sortable
+	url = https://github.com/RubaXa/Sortable/

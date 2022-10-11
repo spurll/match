@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="results-list">
+    {% for u in results %}
+    <div class="sortable-item">
+        {{ u.name }}: {{ u.match.name if u.match else 'None' }}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
