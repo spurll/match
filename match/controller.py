@@ -39,7 +39,7 @@ class MatchController(object):
             user.history.delete()
             db.session.commit()
         except:
-            db.sesion.rollback()
+            db.session.rollback()
             raise
 
         for index, option in enumerate(args):

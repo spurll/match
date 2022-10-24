@@ -14,6 +14,7 @@ based on those rankings (i.e., a house allocation problem).
 * itsdangerous==1.1.0
 * jinja2==2.10.1
 * ldap3==2.9.1
+* email-validator==1.3.0
 * markupsafe==1.1.1
 * requests==2.28.1
 * sqlalchemy==1.3.4
