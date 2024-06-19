@@ -2,15 +2,22 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 import requests
 
-from match import app, db, lm, api
+from match import app, db, lm
 from match.forms import LoginForm, SignupForm, RankingForm
 from match.models import User
 from match.authenticate import authenticate
+from match.controller import MatchController
+
+
+allocation = app.config.get('ALLOCATION')
+notification = app.config.get('NOTIFICATION')
 
 
 @app.route('/')
 @app.route('/index')
 def index():
+    api = MatchController(allocation=allocation, notification=notification)
+
     if api.is_open:
         return redirect(url_for('rank'))
     else:
@@ -20,6 +27,8 @@ def index():
 @app.route('/rank', methods=['GET', 'POST'])
 @login_required
 def rank():
+    api = MatchController(allocation=allocation, notification=notification)
+
     if not api.is_open:
         flash('Ranking is currently closed.')
         return redirect(url_for('results'))
@@ -62,6 +71,8 @@ def rank():
 @app.route('/results')
 @login_required
 def results():
+    api = MatchController(allocation=allocation, notification=notification)
+
     if g.user.is_admin():
         if api.is_open:
             admin_links = [
@@ -86,6 +97,8 @@ def results():
 @app.route('/close')
 @login_required
 def close():
+    api = MatchController(allocation=allocation, notification=notification)
+
     if g.user.is_admin():
         api.close()
 
@@ -95,6 +108,8 @@ def close():
 @app.route('/open')
 @login_required
 def open():
+    api = MatchController(allocation=allocation, notification=notification)
+
     if g.user.is_admin():
         api.open()
 
@@ -104,6 +119,8 @@ def open():
 @app.route('/clear')
 @login_required
 def clear():
+    api = MatchController(allocation=allocation, notification=notification)
+
     if g.user.is_admin():
         api.clear()
 

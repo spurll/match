@@ -17,16 +17,8 @@ lm.login_view = 'login'
 # 2. Import the models. (The schema will need to import the SQLAlchemy object.)
 # 3. Ensure that the tables are created. (Models must be imported first.)
 from match import models
-db.create_all()
-
-
-# This has to happen after the DB is initialized and the tables are created,
-# because the controller needs to query for the state of voting (open/closed).
-from match.controller import MatchController
-api = MatchController(
-    allocation=app.config.get('ALLOCATION'),
-    notification=app.config.get('NOTIFICATION')
-)
+with app.app_context():
+    db.create_all()
 
 
 # We can't import views until after the controller is initialized, because the
